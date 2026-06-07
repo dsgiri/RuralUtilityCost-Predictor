@@ -4,6 +4,7 @@ import { Badge } from './ui/Badge';
 import { Heart, ArrowLeft, Info, AlertTriangle, PlayCircle } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { ConfidenceChart } from './ConfidenceChart';
+import { useSEO } from '../hooks/useSEO';
 
 interface ToolDetailProps {
   toolId: string;
@@ -15,6 +16,12 @@ interface ToolDetailProps {
 
 export function ToolDetail({ toolId, isFavorite, onToggleFavorite, onBack, onOpenTool }: ToolDetailProps) {
   const tool = useMemo(() => TOOLS.find(t => t.id === toolId), [toolId]);
+
+  useSEO({
+    title: tool ? `${tool.title} | RuralPredictor` : 'Tool Not Found | RuralPredictor',
+    description: tool?.description || 'Detailed agricultural prediction model and insights.',
+    keywords: tool ? `${tool.category.toLowerCase()}, ${tool.predictionType.toLowerCase()}, agricultural prediction model` : undefined
+  });
 
   if (!tool) {
     return (

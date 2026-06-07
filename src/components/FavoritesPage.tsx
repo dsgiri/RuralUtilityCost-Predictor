@@ -2,6 +2,7 @@ import React from 'react';
 import { TOOLS } from '../data';
 import { ToolCard } from './ToolCard';
 import { HeartCrack } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 interface FavoritesPageProps {
   favorites: string[];
@@ -10,6 +11,11 @@ interface FavoritesPageProps {
 }
 
 export function FavoritesPage({ favorites, onToggleFavorite, onOpenTool }: FavoritesPageProps) {
+  useSEO({
+    title: 'My Favorites | RuralPredictor',
+    description: 'Access your saved prediction tools and models for quick reference.'
+  });
+
   const favoritesList = TOOLS.filter(t => favorites.includes(t.id));
 
   return (

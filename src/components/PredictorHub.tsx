@@ -4,6 +4,7 @@ import { ToolCategory } from '../types';
 import { ToolCard } from './ToolCard';
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { SectionExplanation } from './SectionExplanation';
+import { useSEO } from '../hooks/useSEO';
 
 interface PredictorHubProps {
   favorites: string[];
@@ -24,6 +25,12 @@ const CATEGORIES: ToolCategory[] = [
 type SortOption = 'newest' | 'mostUsed' | 'alphabetical';
 
 export function PredictorHub({ favorites, onToggleFavorite, onOpenTool }: PredictorHubProps) {
+  useSEO({
+    title: 'RuralPredictor | Agricultural Data & Prediction Hub',
+    description: 'Access model-driven predictions for crops, livestock, and markets. Estimate likely agricultural outcomes with measured confidence bands.',
+    keywords: 'agriculture predictions, crop yield predictor, livestock weight targets, farm data models, rural utility'
+  });
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<ToolCategory | 'All'>('All');
   const [sortBy, setSortBy] = useState<SortOption>('mostUsed');
